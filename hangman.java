@@ -6,7 +6,7 @@ import java.io.*;
 
 // WARNING: IF THIS COMMENT IS DELETED THE PROGRAM WONT COMPILE
 
-// ITS NOT DRAWING THE HANGMAN
+// Current problems: 	amountWrong is always 0		word never equals originalString		haven't tested hangTheMan() yet
 
 public class Hangman {
 	public static void main(String[] args) throws IOException {			//wanna make it so it does try catch instead
@@ -46,7 +46,7 @@ public class Hangman {
 		
 		// Creates the string with _ for letters
 		for (int c = 0; c < originalString.length(); c++)  {
-				word.append( '_');
+				word.append('_');
 		}
 		
 		// Starts the real game
@@ -73,7 +73,7 @@ public class Hangman {
 			
 			// Builds the body of the hangman
 			if (correct == false) {
-				amountWrong++;
+				amountWrong += 1;
 				hangTheMan(amountWrong, hangman);
 			}
 			
@@ -83,6 +83,10 @@ public class Hangman {
 			correct = false;
 			guess = keyboard.next().charAt(0);
 			
+			//if (word.equals(originalString)) 
+				//	System.out.println("BLASJFGASJKGFIJUASFJSAAKJ");
+			
+			//System.out.println(amountWrong);
 		} while(!(word.equals(originalString)));
 	}
 	
