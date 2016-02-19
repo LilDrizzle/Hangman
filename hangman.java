@@ -19,6 +19,7 @@ public class Hangman {
 			System.exit(0);
 		}
 		
+		
 		// Setups most variables
 		Scanner keyboard = new Scanner(System.in);
 		Random generator = new Random();
@@ -31,12 +32,14 @@ public class Hangman {
 												  "\n  |      |" + 
 												  "\n         |" +														// 23 and 25
 												  "\n         |" +														// 34 and 36
-												  "\n         |" +															// 46
+												  "\n         |" +														// 46
 												  "\n         |" +														// 56 and 57 and 58
-												  "\n         |" +															// 69
-												  "\n         |" +													   // 79 and 81
+												  "\n         |" +														// 68
+												  "\n         |" +													   // 78 and 80
 												  "\n_________|"); 			
+		
 		System.out.println(hangman);
+		
 		
 		// Gets a random word from the file
 		for (int c = 0; c < wordIndex - 1; c++) {					// what if wordIndex = 0 or 1?
@@ -44,16 +47,23 @@ public class Hangman {
 		}
 		StringBuilder originalString = new StringBuilder(inputFile.nextLine());
 		
+		
 		// Creates the string with _ for letters
 		for (int c = 0; c < originalString.length(); c++)  {
 				word.append('_');
 		}
 		
+		
 		// Starts the real game
 		System.out.println("Start guessing letters.\n" + word);
 		guess = keyboard.next().charAt(0);
 		test(guess, originalString, word, keyboard, hangman);
-			//System.out.println("Congrats you guessed the word after " + tries + " tries.");
+		
+		// Final statements
+		if (word.toString().equals(originalString.toString()))
+			System.out.println("Congrats you won!");
+		else	
+			System.out.println("Congrats you cheated!");
 	}		
 	
 	public static void test(char guess, StringBuilder originalString, StringBuilder word, Scanner keyboard, StringBuilder hangman) {
@@ -82,7 +92,9 @@ public class Hangman {
 			System.out.println(hangman);
 			System.out.println("\n" + word + "\n");
 			correct = false;
-			guess = keyboard.next().charAt(0);
+			
+			if (!(word.toString().equals(originalString.toString())))			// need this line or else after you get the word you have to enter another letter
+				guess = keyboard.next().charAt(0);
 
 		} while(!(word.toString().equals(originalString.toString())));		// have to use the toString() the normal StringBuilders didn't work
 	}
