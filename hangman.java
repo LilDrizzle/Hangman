@@ -25,7 +25,10 @@ public class Hangman {
 		Random generator = new Random();
 		StringBuilder word = new StringBuilder();
 		Scanner inputFile = new Scanner(wordListFile);
-		
+		StringBuilder guessBox = new StringBuilder("\t-------------\n" +	// 14 characters long
+												   "\t|           |\n" +
+												   "\t|           |\n" +
+												   "\t-------------\n");
 		char guess;
 		int wordIndex = generator.nextInt(20000);
 		StringBuilder hangman = new StringBuilder(" ---------" + 
@@ -57,7 +60,7 @@ public class Hangman {
 		// Starts the real game
 		System.out.println("Start guessing letters.\n" + word);
 		guess = keyboard.next().charAt(0);
-		test(guess, originalString, word, keyboard, hangman);
+		test(guess, originalString, word, keyboard, hangman, guessBox);
 		
 		// Final statements
 		if (word.toString().equals(originalString.toString()))
@@ -66,10 +69,11 @@ public class Hangman {
 			System.out.println("Congrats you cheated!");
 	}		
 	
-	public static void test(char guess, StringBuilder originalString, StringBuilder word, Scanner keyboard, StringBuilder hangman) {
+	public static void test(char guess, StringBuilder originalString, StringBuilder word, Scanner keyboard, StringBuilder hangman, StringBuilder guessBox) {
 		
 		boolean correct = false;
 		int amountWrong = 0;
+		int guessBoxIndex = 19;
 		
 		// Does this while your word doesn't equal the real word
 		do {
@@ -82,6 +86,14 @@ public class Hangman {
 				}
 			}
 			
+			if (!correct) {
+					guessBox.setCharAt(guessBoxIndex, guess);
+					guessBoxIndex += 2;
+					if (guessBoxIndex == 29)
+						guessBoxIndex = 32;
+			}
+					
+			
 			// Builds the body of the hangman
 			if (correct == false) {
 				amountWrong++;
@@ -89,7 +101,7 @@ public class Hangman {
 			}
 			
 			// Setup for another guess
-			System.out.println(hangman);
+			System.out.println(hangman + guessBox.toString());
 			System.out.println("\n" + word + "\n");
 			correct = false;
 			
