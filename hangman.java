@@ -6,7 +6,7 @@ import java.io.*;
 
 // WARNING: IF THIS COMMENT IS DELETED THE PROGRAM WONT COMPILE
 
-// Current problems: 	haven't tested hangTheMan() yet
+// Current problems: 	guess box is a bit screwed up
 
 public class Hangman {
 	public static void main(String[] args) throws IOException {			//wanna make it so it does try catch instead
@@ -26,9 +26,9 @@ public class Hangman {
 		StringBuilder word = new StringBuilder();
 		Scanner inputFile = new Scanner(wordListFile);
 		StringBuilder guessBox = new StringBuilder("\t-------------\n" +	// 14 characters long
-												   "\t|           |\n" +
-												   "\t|           |\n" +
-												   "\t-------------\n");
+																			  "\t|           |\n" +
+																			  "\t|           |\n" +
+																			  "\t-------------\n");
 		char guess;
 		int wordIndex = generator.nextInt(20000);
 		StringBuilder hangman = new StringBuilder(" ---------" + 
@@ -73,7 +73,7 @@ public class Hangman {
 		
 		boolean correct = false;
 		int amountWrong = 0;
-		int guessBoxIndex = 19;
+		int guessBoxIndex = 17;
 		
 		// Does this while your word doesn't equal the real word
 		do {
@@ -101,7 +101,8 @@ public class Hangman {
 			}
 			
 			// Setup for another guess
-			System.out.println(hangman + guessBox.toString());
+			System.out.println(hangman);
+			System.out.println(guessBox.toString());
 			System.out.println("\n" + word + "\n");
 			correct = false;
 			
